@@ -62,7 +62,7 @@ class NapTimeSkill(MycroftSkill):
         # Dim and look downward to 'go to sleep'
         # TODO: Get current brightness from somewhere
         self.old_brightness = 30
-        for i in range (0, (self.old_brightness - 10) // 2):
+        for i in range(0, (self.old_brightness - 10) // 2):
             self.enclosure.eyes_brightness(self.old_brightness - i * 2)
             time.sleep(0.15)
         self.enclosure.eyes_look("d")
@@ -81,8 +81,12 @@ class NapTimeSkill(MycroftSkill):
         if started_by_skill:
             self.wake_up_animation()
             # Announce that the unit is awake
-            self.speak_dialog("i.am.awake")
-            wait_while_speaking()
+            
+            # self.speak_dialog("i.am.awake")
+            # wait_while_speaking()
+            order = self.get_response("i.am.awake")
+            self.bus.emit("recognizer_loop:utterance", {"utterances": [order], "lang": "en-us"})
+            
 
     def wake_up_animation(self):
         """
