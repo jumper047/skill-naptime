@@ -82,10 +82,12 @@ class NapTimeSkill(MycroftSkill):
             self.wake_up_animation()
             # Announce that the unit is awake
             
-            # self.speak_dialog("i.am.awake")
-            # wait_while_speaking()
-            self.get_response("i.am.awake")
-
+            self.speak_dialog("i.am.awake")
+            wait_while_speaking()
+            # order = self.get_response("i.am.awake")
+            # self.bus.emit(Message("recognizer_loop:utterance",
+                                  # {"utterances": [order], "lang": "en-us"}))
+            self.bus.emit(Message("mycroft.mic.listen"))
             
             
 
