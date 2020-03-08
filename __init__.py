@@ -85,7 +85,9 @@ class NapTimeSkill(MycroftSkill):
             # self.speak_dialog("i.am.awake")
             # wait_while_speaking()
             order = self.get_response("i.am.awake")
-            self.bus.emit("recognizer_loop:utterance", {"utterances": [order], "lang": "en-us"})
+            self.emitter.emit(Message("recognizer_loop:utterance",
+                                      {"utterances": [order], "lang": "en-us"}))
+            
             
 
     def wake_up_animation(self):
